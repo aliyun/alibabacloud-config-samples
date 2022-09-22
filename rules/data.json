@@ -1,0 +1,24 @@
+{
+    "orderingTimestamp": "评估执行开始时间戳",
+    "invokingEvent": {
+        "messageType": "消息类型",
+        "configurationType": "资源配置推送类型",
+        "configurationItem": {
+            "accountId": "资源所属阿里云账号ID",
+            "availabilityZone": "资源所属可用区",
+            "regionId": "资源所属地域",
+            "configuration": "资源的详细配置",
+            "captureTime": "配置审计发现资源变更事件并生成日志的时间戳",
+            "resourceCreationTime": "新建资源的时间戳",
+            "resourceStatus": "资源状态",
+            "resourceId": "资源ID",
+            "resourceName": "资源名称",
+            "resourceType": "资源类型",
+            "tags": "标签"
+        }
+    },
+    "ruleParameters": {
+        "key": "value"
+    },
+    "resultToken": "函数计算中的回调令牌"
+}
