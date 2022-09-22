@@ -1,7 +1,6 @@
 > # Aliyun Config Python Samples
 
-- This repo provides samples for config customer feature, it will help you to deploy rules and remediation more quickly.
--
+This repo provides samples for config customer features, it will help you to deploy rules and remediation more quickly.
 
 ## Prerequisite
 
