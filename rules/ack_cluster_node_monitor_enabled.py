@@ -21,8 +21,8 @@ COMPLIANCE_TYPE_NOT_APPLICABLE = 'NOT_APPLICABLE'
 # Config api endpoint, International sites use ap-southeast-1 and config.ap-southeast-1.aliyuncs.com
 CONFIG_SERVICE_REGION = 'cn-shanghai'
 CONFIG_SERVICE_ENDPOINT = 'config.cn-shanghai.aliyuncs.com'
-AK = '********'
-SK = '********'
+AK = '******'
+SK = '******'
 
 
 # 入口方法
@@ -35,7 +35,7 @@ def handler(event, context):
     ordering_timestamp = evt.get('orderingTimestamp')
     invoking_event = evt.get('invokingEvent')
     account_id = invoking_event.get('accountId')
-
+    # regionId = invoking_event.get('configurationItem')['regionId']
     client = AcsClient(AK, SK, CONFIG_SERVICE_REGION)
     evaluations = []
     # ResourceType supported by the config
@@ -48,6 +48,7 @@ def handler(event, context):
         cluster_page_json = query_cluster_page(client, page_size, page_number)
         if "clusters" in cluster_page_json and cluster_page_json["clusters"]:
             for cluster in cluster_page_json["clusters"]:
+                logger.info(cluster["cluster_id"])
                 compliant_result = query_nodes_evaluation(client, cluster["cluster_id"])
                 if compliant_result:
                     evaluation = {
@@ -208,5 +209,4 @@ def put_evaluations(context, result_token, evaluations):
         logger.info('PutEvaluations with request: {}, response: {}.'.format(request, response))
     except Exception as e:
         logger.error('PutEvaluations error: %s' % e)
-
 

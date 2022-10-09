@@ -24,8 +24,8 @@ CONFIGURATION_TYPE_NONE = 'NONE'
 CONFIG_SERVICE_REGION = 'cn-shanghai'
 CONFIG_SERVICE_ENDPOINT = 'config.cn-shanghai.aliyuncs.com'
 
-AK = '********'
-SK = '********'
+AK = '******'
+SK = '******'
 
 
 # 入口方法
@@ -82,7 +82,7 @@ def evaluate_configuration_item(rule_parameters, configuration_item):
         compliance_type = COMPLIANCE_TYPE_NOT_APPLICABLE
         return compliance_type, annotation
 
-    permission_list = configuration["Permissions"]
+    permission_list = configuration["Permissions"]['Permission']
     for permission in permission_list:
         policy = permission["Policy"]
         direction = permission["Direction"]

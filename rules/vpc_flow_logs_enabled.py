@@ -27,8 +27,8 @@ CONFIGURATION_TYPE_NONE = 'NONE'
 CONFIG_SERVICE_REGION = 'cn-shanghai'
 CONFIG_SERVICE_ENDPOINT = 'config.cn-shanghai.aliyuncs.com'
 
-AK = '********'
-SK = '********'
+AK = '******'
+SK = '******'
 
 
 # main function
@@ -54,7 +54,7 @@ def handler(event, context):
         resource_json = json.loads(resource_result)
         configuration_item["configuration"] = resource_json["DiscoveredResourceDetail"]["Configuration"]
 
-    compliance_type, annotation = evaluate_configuration_item(rule_parameters, configuration_item)
+    compliance_type, annotation = evaluate_configuration_item(context, rule_parameters, configuration_item)
     evaluations = [
         {
             'accountId': account_id,
@@ -74,8 +74,8 @@ def handler(event, context):
 
 # 实现资源评估逻辑
 def evaluate_configuration_item(context, rule_parameters, configuration_item):
-    vpc_region_id = configuration_item["RegionId"]
-    vpc_id = configuration_item["VpcId"]
+    vpc_region_id = configuration_item["regionId"]
+    vpc_id = json.loads(configuration_item['configuration'])["VpcId"]
     vpc_logs_count = query_vpc_logs(context, vpc_region_id, vpc_id)
 
     compliance_type = COMPLIANCE_TYPE_COMPLIANT
@@ -93,7 +93,7 @@ def query_vpc_endpoint(context, region_id):
         'region_id',
     )
 
-    ecs_center_endpoint = "ecs.aliyuncs.com"
+    vpc_center_endpoint = "vpc.aliyuncs.com"
     request = CommonRequest()
     request.set_domain('vpc.aliyuncs.com')
     request.set_version('2016-04-28')
@@ -106,7 +106,7 @@ def query_vpc_endpoint(context, region_id):
     for region_info in json_res["Regions"]["Region"]:
         if region_id == region_info["RegionId"]:
             return region_info["RegionEndpoint"]
-    return ecs_center_endpoint
+    return vpc_center_endpoint
 
 
 def query_vpc_logs(context, region_id, vpc_id):

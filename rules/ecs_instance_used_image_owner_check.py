@@ -24,8 +24,8 @@ CONFIGURATION_TYPE_NONE = 'NONE'
 CONFIG_SERVICE_REGION = 'cn-shanghai'
 CONFIG_SERVICE_ENDPOINT = 'config.cn-shanghai.aliyuncs.com'
 
-AK = '********'
-SK = '********'
+AK = '******'
+SK = '******'
 
 
 
@@ -51,8 +51,7 @@ def handler(event, context):
         resource_json = json.loads(resource_result)
         configuration_item["configuration"] = resource_json["DiscoveredResourceDetail"]["Configuration"]
 
-    compliance_type, annotation = evaluate_configuration_item(
-        rule_parameters, configuration_item)
+    compliance_type, annotation = evaluate_configuration_item(context, rule_parameters, configuration_item)
     evaluations = [
         {
             'accountId': account_id,
@@ -71,8 +70,8 @@ def handler(event, context):
 
 # 实现资源评估逻辑
 def evaluate_configuration_item(context, rule_parameters, configuration_item):
-    instance_region_id = configuration_item["RegionId"]
-    instance_image_id = configuration_item["ImageId"]
+    instance_region_id = configuration_item["regionId"]
+    instance_image_id = json.loads(configuration_item['configuration'])["ImageId"]
     image_owner = query_image_owner(context, instance_region_id, instance_image_id)
 
     compliance_type = COMPLIANCE_TYPE_COMPLIANT
