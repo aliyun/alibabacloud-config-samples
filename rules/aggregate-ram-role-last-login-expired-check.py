@@ -191,7 +191,7 @@ def sls_get_logs_cnt(region_id, project, logstore, resource_id):
     get_logs_request = sls_20201230_models.GetLogsRequest(
         from_=from_timestamp,
         to=to_timestamp,
-        query='event.userIdentity.principalId: ' + resource_id  # event.userIdentity.principalId: 389051450072705987
+        query='event.userIdentity.principalId: ' + resource_id  # event.userIdentity.principalId: 389051450072xxxxxx
     )
     try:
         runtime = util_models.RuntimeOptions()
