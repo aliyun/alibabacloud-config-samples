@@ -49,6 +49,7 @@ def handler(event, context):
     configuration_item = invoking_event.get('configurationItem')
     account_id = configuration_item.get('accountId')
     resource_id = configuration_item.get('resourceId')
+    resource_name = configuration_item.get('resourceName')
     resource_type = configuration_item.get('resourceType')
     region_id = configuration_item.get('regionId')
 
@@ -57,6 +58,7 @@ def handler(event, context):
         {
             'accountId': account_id,
             'complianceResourceId': resource_id,
+            'complianceResourceName': resource_name,
             'complianceResourceType': resource_type,
             'complianceRegionId': region_id,
             'orderingTimestamp': ordering_timestamp,
