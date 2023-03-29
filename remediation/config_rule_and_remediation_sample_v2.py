@@ -26,7 +26,7 @@ class Sample:
             access_key_secret=access_key_secret
         )
         # 访问的域名
-        config.endpoint = f'config.cn-shanghai.aliyuncs.com'
+        config.endpoint = f'config.cn-hangzhou.aliyuncs.com'
         return Config20200907Client(config)
 
     @staticmethod
@@ -173,21 +173,21 @@ if __name__ == '__main__':
     }
     config_rule_id = Sample.create_config_rule(input_parameters)
 
-    remediation_tags = {
-        "a_sys_app_id":"200345",
-        "a_sys_app_name": "name",
-        "a_sys_env": "dev",
-        "a_sys_owner_div": "054",
-        "a_sys_owner_dept": "0645",
-    }
-    Sample.create_remediation(config_rule_id, remediation_tags)
-
-    ## wait for 60s, after finish evaluate then start remediation execution and monitor
-    time.sleep(60)
-    print("start remediation configRuleId:" + config_rule_id)
-    Sample.start_remediation(config_rule_id)
-    time.sleep(60)
-    ## 等异步评估任务完成再探查合规记录count
-    non_compliance_cnt = Sample.get_resource_compliance_by_config_rule(config_rule_id)
+    # remediation_tags = {
+    #     "a_sys_app_id":"200345",
+    #     "a_sys_app_name": "name",
+    #     "a_sys_env": "dev",
+    #     "a_sys_owner_div": "054",
+    #     "a_sys_owner_dept": "0645",
+    # }
+    # Sample.create_remediation(config_rule_id, remediation_tags)
+    # 
+    # ## wait for 60s, after finish evaluate then start remediation execution and monitor
+    # time.sleep(60)
+    # print("start remediation configRuleId:" + config_rule_id)
+    # Sample.start_remediation(config_rule_id)
+    # time.sleep(60)
+    # ## 等异步评估任务完成再探查合规记录count
+    # non_compliance_cnt = Sample.get_resource_compliance_by_config_rule(config_rule_id)
 
     print("finish remediation configRuleId:" + config_rule_id)
