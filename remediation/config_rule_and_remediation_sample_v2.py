@@ -12,14 +12,15 @@ from alibabacloud_tea_util.client import Client as UtilClient
 AccessKey = 'xxx'
 AccessSecret = 'xxx'
 
+
 class Sample:
     def __init__(self):
         pass
 
     @staticmethod
     def create_client(
-        access_key_id: str,
-        access_key_secret: str,
+            access_key_id: str,
+            access_key_secret: str,
     ) -> Config20200907Client:
         config = open_api_models.Config(
             access_key_id=access_key_id,
@@ -31,12 +32,12 @@ class Sample:
 
     @staticmethod
     def create_config_rule(
-        input_parameters
+            input_parameters
     ) -> str:
 
         client = Sample.create_client(AccessKey, AccessSecret)
         create_config_rule_request = config_20200907_models.CreateConfigRuleRequest(
-            config_rule_name= 'delta-required-tags-by-sdk-v2',
+            config_rule_name='delta-required-tags-by-sdk-v2',
             description='最多可定义6组标签，资源需同时具有指定的所有标签，视为“合规”。标签输入大小写敏感，每组最多只能输入一个值。',
             resource_types_scope=[
                 # 'ACS::ECS::Disk',
@@ -62,8 +63,8 @@ class Sample:
 
     @staticmethod
     def create_remediation(
-        config_rule_id,
-        remediation_tags
+            config_rule_id,
+            remediation_tags
     ) -> None:
         # 工程代码泄露可能会导致AccessKey泄露，并威胁账号下所有资源的安全性。以下代码示例仅供参考，建议使用更安全的 STS 方式，更多鉴权访问方式请参见：https://help.aliyun.com/document_detail/378659.html
         client = Sample.create_client(AccessKey, AccessSecret)
@@ -97,8 +98,8 @@ class Sample:
                     "allowedValues": [],
                     "description": "[Required]资源ID。"
                 }
-        ]
-    }
+            ]
+        }
         create_remediation_request = config_20200907_models.CreateRemediationRequest(
             config_rule_id=config_rule_id,
             remediation_type='OOS',
@@ -146,8 +147,9 @@ class Sample:
         runtime = util_models.RuntimeOptions()
         try:
             # 复制代码运行请自行打印 API 的返回值
-            response = client.get_resource_compliance_by_config_rule_with_options(get_resource_compliance_by_config_rule_request, runtime)
-            for res in response.body.compliance_result.compliances :
+            response = client.get_resource_compliance_by_config_rule_with_options(
+                get_resource_compliance_by_config_rule_request, runtime)
+            for res in response.body.compliance_result.compliances:
                 if res.compliance_type == 'NON_COMPLIANT':
                     return res.count
             return 0
@@ -155,8 +157,8 @@ class Sample:
             # 如有需要，请打印 error
             UtilClient.assert_as_string(error.message)
 
-if __name__ == '__main__':
 
+if __name__ == '__main__':
     input_parameters = {
         "tag1Key": "a_sys_app_id",
         "tag1Value": "200345",
