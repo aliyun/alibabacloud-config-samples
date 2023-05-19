@@ -11,6 +11,8 @@ import ssl
 import warnings
 
 
+# 使用HTTPS协议访问OpenAPI时，默认会开启校验SSL/TLS证书有效性，若您代码环境没有证书环境，则会报错证书校验失败。
+# 为保障生产环境通信安全，建议您保持开启，若在测试环境必须忽略证书校验，可以通过运行时参数ignore_ssl设置
 warnings.filterwarnings("ignore")
 ssl._create_default_https_context = ssl._create_unverified_context()
 
