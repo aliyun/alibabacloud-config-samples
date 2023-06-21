@@ -22,6 +22,10 @@ provider "alicloud" {
 	region     = "${var.region_id}"
 	access_key = "${var.access_key}"
 	secret_key = "${var.secret_key}"
+  assume_role {
+    role_arn = "acs:ram::107315933626xxx:role/config_test"
+    session_name       = "config_test"
+  }
 }
 
 resource "alicloud_log_project" "this" {
