@@ -7,12 +7,6 @@ terraform {
   }
 }
 
-variable "access_key" {
-	default = "this is ak"
-}
-variable "secret_key" {
-	default = "this is sk"
-}
 variable "region_id" {
   # The Cloud Config region support cn-shanghai(cn) and ap-southeast-1(intl).
   default="ap-southeast-1"
@@ -20,12 +14,6 @@ variable "region_id" {
 
 provider "alicloud" {
 	region     = "${var.region_id}"
-	access_key = "${var.access_key}"
-	secret_key = "${var.secret_key}"
-  assume_role {
-    role_arn = "acs:ram::107315933626xxx:role/config_test"
-    session_name       = "config_test"
-  }
 }
 
 resource "alicloud_log_project" "this" {
