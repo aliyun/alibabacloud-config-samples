@@ -1,0 +1,12 @@
+{
+    "children": [
+      {
+        "featureSource": "CONFIGURATION_FIELD_$.Config",
+        "desired": "512",
+        "children": [],
+        "operator": "Greater",
+        "featurePath": "$.set-max-intset-entries"
+      }
+    ],
+    "operator": "and"
+  }
