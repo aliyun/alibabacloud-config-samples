@@ -17,3 +17,5 @@ application.pid
 /remediation/terraform/oos/terraform.tfstate
 /remediation/terraform/oos/terraform.tfstate.backup
 /remediation/terraform/oos/.terraform.lock.hcl
+/rules/preview-rule/IAC_misconfiguration_proactive_plugin/dist/
+/rules/preview-rule/IAC_misconfiguration_proactive_plugin/node_modules/

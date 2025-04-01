@@ -1,7 +1,5 @@
 provider "alicloud" {
   region     = "cn-shanghai"
-  access_key = "xxx"
-  secret_key = "xxx"
   assume_role {
     role_arn = "acs:ram::107315933626xxx:role/config_test"
     session_name       = "config_test"
