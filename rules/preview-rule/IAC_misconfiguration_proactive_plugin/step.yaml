@@ -1,0 +1,40 @@
+---
+apiVersion: v2
+kind: DefaultJob
+id: CloudConfigProactive
+name: 配置审计合规预检
+description: 配置审计合规预检
+helpUrl: git@codeup.aliyun.com:617a574b537a989b1e8cf2fe/ROS-webapp-laizhong.git
+execution:
+  executor: node
+  main: dist/index.js
+items:
+  - label: StackPath
+    name: StackPath
+    type: textarea
+    value: 
+    description: IAC代码路径，如 ./infra/iac_webapp_demo.yaml
+  - label: RegionId
+    name: RegionId
+    type: select
+    value: "cn-shanghai"
+    datasource:
+      - label: "上海"
+        value: "cn-shanghai"
+      - label: "新加坡"
+        value: "ap-southeast-1"
+    description: 站点
+  - label: AccessKey
+    name: AccessKey
+    type: input
+    description: accessKey
+
+  - label: AccessSecret
+    name: AccessSecret
+    type: password
+    description: accessSecret
+
+  - label: 开启检测
+    name: EnableEvaluate
+    type: checkbox
+    value: ture

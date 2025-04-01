@@ -1,0 +1,15 @@
+*settings
+*project
+*classpath
+*target
+*iml
+.idea/
+.DS_Store
+**/.DS_Store
+application.pid
+src/main/resources/application-dev.properties
+src/test/java/com/aliyun/config/Simple.java
+src/main/resources/resource-attribute.json
+src/test/java/com/aliyun/config/RedisTemplateTest.java
+dist/*
+node_modules/*
